@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moshe Landau — Developer Portfolio</title>
+  <meta name="description" content="Portfolio site for Moshe Landau">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <style>
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+/* Variables */
+:root {
+  --color-primary: #4F46E5;
+  --color-secondary: #6366F1;
+  --color-accent: #A78BFA;
+  --color-bg: #FFFFFF;
+  --color-text: #111827;
+  --color-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --color-surface: #F9FAFB;
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --max-width: 1100px;
+  --section-padding: 5rem 1.5rem;
+}
+/* Base */
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { color: var(--color-secondary); }
+h1, h2, h3 { font-family: var(--font-heading); line-height: 1.2; }
+.container { max-width: var(--max-width); margin: 0 auto; }
+section { padding: var(--section-padding); }
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  color: var(--color-text);
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 3px;
+  background: var(--color-primary);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+/* Navigation */
+nav {
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+}
+nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+nav ul { list-style: none; display: flex; gap: 1.5rem; }
+nav a {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+nav a:hover { color: var(--color-primary); }
+/* Hero */
+.hero {
+  padding: 8rem 1.5rem 6rem;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.hero .subtitle {
+  font-size: 1.25rem;
+  color: var(--color-secondary);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+.hero .bio {
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  color: var(--color-muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+.hero .cta-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero .cta-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s;
+}
+.cta-primary {
+  background: var(--color-primary);
+  color: #fff !important;
+}
+.cta-primary:hover { background: var(--color-secondary); }
+.cta-secondary {
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text) !important;
+}
+.cta-secondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary) !important;
+}
+/* Projects */
+.projects { background: var(--color-surface); }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.project-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.project-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+.project-card h3 a { color: var(--color-text); }
+.project-card h3 a:hover { color: var(--color-primary); }
+.project-card .description {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+.project-card .tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+.tech-tag {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.project-card .highlights {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+}
+.project-card .highlights li {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  padding: 0.2rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+.project-card .highlights li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+/* Skills */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+.skill-category h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.skill-item .name {
+  min-width: 100px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.skill-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--color-border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+/* Timeline */
+.timeline { background: var(--color-surface); }
+.timeline-list {
+  position: relative;
+  padding-left: 2rem;
+}
+.timeline-list::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-primary);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.75rem;
+  top: 0.5rem;
+  width: 10px;
+  height: 10px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  border: 2px solid var(--color-bg);
+}
+.timeline-item .date {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-bottom: 0.25rem;
+}
+.timeline-item .commit-msg {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.timeline-item .project-ref {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-top: 0.15rem;
+}
+.timeline-item .project-ref a { color: var(--color-accent); }
+.timeline-item .hash {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--color-accent);
+}
+/* Contact */
+.contact { text-align: center; }
+.contact p { color: var(--color-muted); margin-bottom: 1.5rem; font-size: 1.05rem; }
+.contact-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  transition: border-color 0.2s, color 0.2s;
+}
+.contact-links a:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .hero .subtitle { font-size: 1.05rem; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  nav ul { gap: 0.75rem; }
+  nav a { font-size: 0.8rem; }
+  section { padding: 3rem 1rem; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.65rem; }
+  nav .container { flex-direction: column; gap: 0.5rem; }
+  .hero .cta-links { flex-direction: column; align-items: center; }
+}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <span class="brand">Moshe Landau</span>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav><section id="hero" class="hero">
+  <div class="container">
+    <h1>Moshe Landau — Full-Stack Developer</h1>
+    <p class="subtitle">Building with Laravel, Vue 3 &amp; Inertia.js</p>
+    <p class="bio">Moshe Landau is a full-stack developer with hands-on experience across 9 active projects, and 450 commits of shipped code. Primarily working in PHP, Vue, TypeScript with frameworks including Laravel, Vue 3, Inertia.js.</p>
+    <div class="cta-links">
+    <a href="https://github.com/moshelandau" class="cta-primary" target="_blank" rel="noopener">GitHub Profile</a>
+    </div>
+  </div>
+</section><section id="projects" class="projects">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3><a href="https://github.com/chaim-code/Derech" target="_blank" rel="noopener">Derech</a></h3>
+        <p class="description">YDSH Tuition System</p>
+        <div class="tech-stack">
+        <span class="tech-tag">Laravel</span>
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">Vue 3</span>
+        <span class="tech-tag">Inertia.js</span>
+        <span class="tech-tag">PostgreSQL</span>
+        </div>
+        <ul class="highlights">
+        <li>Fix: Email statement from account page (Feedback #8)</li>
+        <li>Add recurring CC payment schedules with auto-processing (#35)</li>
+        <li>Replace inline void/refund with 3-dot dropdown menu, add edit for non-CC payments</li>
+        </ul>
+        <div class="project-meta">
+          <span>50 commits</span>
+          <span>Mar 26, 2026 – Mar 29, 2026</span>
+        </div>
+      </div>      <div class="project-card">
+        <h3><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></h3>
+        <p class="description">POS / e-commerce system</p>
+        <div class="tech-stack">
+        <span class="tech-tag">Laravel</span>
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">Vue 3</span>
+        <span class="tech-tag">Inertia.js</span>
+        <span class="tech-tag">PostgreSQL</span>
+        </div>
+        <ul class="highlights">
+        <li>Fix: Add logo to receipt and update system branding (Feedback #20)</li>
+        <li>Fix: Product pricing allows exact retail price entry (Feedback #21)</li>
+        <li>Fix: Show store credit instead of change due on receipt (Feedback #19)</li>
+        </ul>
+        <div class="project-meta">
+          <span>50 commits</span>
+          <span>Mar 22, 2026 – Mar 27, 2026</span>
+        </div>
+      </div>      <div class="project-card">
+        <h3><a href="https://github.com/moshelandau/attendance.system" target="_blank" rel="noopener">Attendance System</a></h3>
+        <p class="description">UTA student/teacher attendance tracking with SMS/voice and AI parsing</p>
+        <div class="tech-stack">
+        <span class="tech-tag">Laravel</span>
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">Vue 3</span>
+        <span class="tech-tag">Inertia.js</span>
+        <span class="tech-tag">PostgreSQL</span>
+        <span class="tech-tag">Plivo</span>
+        <span class="tech-tag">Claude AI</span>
+        </div>
+        <ul class="highlights">
+        <li>Allow SMS submission regardless of teacher reminder mode</li>
+        <li>Add SMS student list with IDs and fix Gemini silence</li>
+        <li>Add press-1-for-Gemini to voice reminder calls</li>
+        </ul>
+        <div class="project-meta">
+          <span>50 commits</span>
+          <span>Feb 22, 2026 – Feb 25, 2026</span>
+        </div>
+      </div>      <div class="project-card">
+        <h3><a href="https://github.com/moshelandau/SimpleForwarding" target="_blank" rel="noopener">SimpleForwarding</a></h3>
+        <p class="description">CMS / website</p>
+        <div class="tech-stack">
+        <span class="tech-tag">Laravel</span>
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">Filament</span>
+        <span class="tech-tag">React</span>
+        <span class="tech-tag">Inertia.js</span>
+        <span class="tech-tag">Tailwind CSS</span>
+        </div>
+        <ul class="highlights">
+        <li>Add featured_image_url to all models and media library picker in admin (#47)</li>
+        <li>Fix media library gallery 500 error (#46)</li>
+        <li>Fix featured image URLs and add images to success stories (#45)</li>
+        </ul>
+        <div class="project-meta">
+          <span>50 commits</span>
+          <span>Mar 15, 2026 – Mar 17, 2026</span>
+        </div>
+      </div>      <div class="project-card">
+        <h3><a href="https://github.com/jatinthapar1910/utaen.org" target="_blank" rel="noopener">UTAEN</a></h3>
+        <p class="description">UTA attendance system</p>
+        <div class="tech-stack">
+        <span class="tech-tag">Laravel</span>
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">Vue 3</span>
+        <span class="tech-tag">Inertia.js</span>
+        </div>
+        <ul class="highlights">
+        <li>Fix Academic Class Report 500: rename principal_id to branch_id in test_report_summaries</li>
+        <li>Fix Academic Class Report: add safety guard for empty tests array</li>
+        <li>Sign-in sheet: multi-select subjects, group teachers into single rows</li>
+        </ul>
+        <div class="project-meta">
+          <span>50 commits</span>
+          <span>Mar 18, 2026 – Mar 26, 2026</span>
+        </div>
+      </div>      <div class="project-card">
+        <h3><a href="https://github.com/jatinthapar1910/mealcount.org" target="_blank" rel="noopener">MealCount</a></h3>
+        <p class="description">School meal counting and bulk closure</p>
+        <div class="tech-stack">
+        <span class="tech-tag">Laravel</span>
+        <span class="tech-tag">PHP</span>
+        </div>
+        <ul class="highlights">
+        <li>Fix migration: handle NULL-to-NULL duplicate conflicts during backfill</li>
+        <li>Fix date formatting on bulk closure index page</li>
+        <li>Add bulk closure feature for holiday/vacation meal cancellation</li>
+        </ul>
+        <div class="project-meta">
+          <span>50 commits</span>
+          <span>Feb 13, 2026 – Mar 27, 2026</span>
+        </div>
+      </div>      <div class="project-card">
+        <h3><a href="https://github.com/jatinthapar1910/medsync" target="_blank" rel="noopener">MedSync</a></h3>
+        <p class="description">Healthcare app for clients, providers and appointments</p>
+        <div class="tech-stack">
+        <span class="tech-tag">Next.js</span>
+        <span class="tech-tag">TypeScript</span>
+        <span class="tech-tag">Prisma</span>
+        <span class="tech-tag">PostgreSQL</span>
+        </div>
+        <ul class="highlights">
+        <li>chore: remove Vercel production deployment workflow</li>
+        <li>chore: add production deployment script</li>
+        <li>chore: trigger production deployment</li>
+        </ul>
+        <div class="project-meta">
+          <span>50 commits</span>
+          <span>Feb 1, 2026 – Feb 16, 2026</span>
+        </div>
+      </div>      <div class="project-card">
+        <h3><a href="https://github.com/jatinthapar1910/shipping" target="_blank" rel="noopener">Shipping</a></h3>
+        <p class="description">Shipping management with Google Maps API</p>
+        <div class="tech-stack">
+        <span class="tech-tag">Laravel</span>
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">Google Maps API</span>
+        </div>
+        <ul class="highlights">
+        <li>feat(SFW-39): migrate AddressAutocomplete to new Google Maps Places API</li>
+        <li>Integrate AddressAutocomplete into customer address forms</li>
+        <li>Add customer-level customs broker and ISF filing preferences (SFW-43)</li>
+        </ul>
+        <div class="project-meta">
+          <span>50 commits</span>
+          <span>Feb 19, 2026 – Mar 16, 2026</span>
+        </div>
+      </div>      <div class="project-card">
+        <h3><a href="https://github.com/jatinthapar1910/simpletrics" target="_blank" rel="noopener">Simpletrics</a></h3>
+        <p class="description">Analytics and reporting platform</p>
+        <div class="tech-stack">
+        <span class="tech-tag">Laravel</span>
+        <span class="tech-tag">PHP</span>
+        </div>
+        <ul class="highlights">
+        <li>Add TimeTracking module with billing report</li>
+        <li>Added agents.md</li>
+        <li>updated env</li>
+        </ul>
+        <div class="project-meta">
+          <span>50 commits</span>
+          <span>May 6, 2025 – Mar 29, 2026</span>
+        </div>
+      </div>    </div>
+  </div>
+</section><section id="skills" class="skills">
+  <div class="container">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Languages</h3>
+          <div class="skill-item">
+            <span class="name">PHP</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:100%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Vue</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:17%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">TypeScript</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:8%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">JavaScript</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:6%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Markdown</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:5%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">JSON</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:2%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">CSS</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:1%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">SQL</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:1%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">SCSS</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:1%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Python</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:1%"></div></div>
+          </div>
+        </div>        <div class="skill-category">
+          <h3>Frameworks</h3>
+          <div class="skill-item">
+            <span class="name">Laravel</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Vue 3</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Inertia.js</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Filament</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">React</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Tailwind CSS</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Next.js</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>
+        </div>        <div class="skill-category">
+          <h3>Tools & Services</h3>
+          <div class="skill-item">
+            <span class="name">PostgreSQL</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Plivo</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Claude AI</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Prisma</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>          <div class="skill-item">
+            <span class="name">Google Maps API</span>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+          </div>
+        </div>    </div>
+  </div>
+</section><section id="timeline" class="timeline">
+  <div class="container">
+    <h2 class="section-title">Recent Activity</h2>
+    <div class="timeline-list">
+      <div class="timeline-item">
+        <div class="date">Mar 29, 2026</div>
+        <div class="commit-msg">Merge pull request #36 from chaim-code/fix/feedback-8-email-statement <span class="hash">3b06f95</span></div>
+        <div class="project-ref"><a href="https://github.com/chaim-code/Derech" target="_blank" rel="noopener">Derech</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 29, 2026</div>
+        <div class="commit-msg">Fix: Email statement from account page (Feedback #8) <span class="hash">e12c3ab</span></div>
+        <div class="project-ref"><a href="https://github.com/chaim-code/Derech" target="_blank" rel="noopener">Derech</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 29, 2026</div>
+        <div class="commit-msg">Add TimeTracking module with billing report <span class="hash">f9b0d9b2a</span></div>
+        <div class="project-ref"><a href="https://github.com/jatinthapar1910/simpletrics" target="_blank" rel="noopener">Simpletrics</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 29, 2026</div>
+        <div class="commit-msg">Add recurring CC payment schedules with auto-processing (#35) <span class="hash">1c75b16</span></div>
+        <div class="project-ref"><a href="https://github.com/chaim-code/Derech" target="_blank" rel="noopener">Derech</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Fix migration: handle NULL-to-NULL duplicate conflicts during backfill <span class="hash">722e10c</span></div>
+        <div class="project-ref"><a href="https://github.com/jatinthapar1910/mealcount.org" target="_blank" rel="noopener">MealCount</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Fix date formatting on bulk closure index page <span class="hash">680fe97</span></div>
+        <div class="project-ref"><a href="https://github.com/jatinthapar1910/mealcount.org" target="_blank" rel="noopener">MealCount</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Merge pull request #177 from moshelandau/fix/feedback-20-receipt-logo <span class="hash">c0530b3</span></div>
+        <div class="project-ref"><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Fix: Add logo to receipt and update system branding (Feedback #20) <span class="hash">4803898</span></div>
+        <div class="project-ref"><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Merge pull request #176 from moshelandau/fix/feedback-21-product-pricing <span class="hash">aec52cd</span></div>
+        <div class="project-ref"><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Fix: Product pricing allows exact retail price entry (Feedback #21) <span class="hash">58a01aa</span></div>
+        <div class="project-ref"><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Merge pull request #175 from moshelandau/fix/feedback-19-store-credit-receipt <span class="hash">30e6e19</span></div>
+        <div class="project-ref"><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Fix: Show store credit instead of change due on receipt (Feedback #19) <span class="hash">ddf5644</span></div>
+        <div class="project-ref"><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Merge pull request #174 from moshelandau/fix/feedback-15-search-chosson-kallah-name <span class="hash">b1db71c</span></div>
+        <div class="project-ref"><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Fix: Search orders by chosson/kallah name and more fields (Feedback #15) <span class="hash">cb629b8</span></div>
+        <div class="project-ref"><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></div>
+      </div>      <div class="timeline-item">
+        <div class="date">Mar 27, 2026</div>
+        <div class="commit-msg">Merge pull request #173 from moshelandau/fix/feedback-13-remove-discount <span class="hash">8167654</span></div>
+        <div class="project-ref"><a href="https://github.com/moshelandau/Momentique" target="_blank" rel="noopener">Momentique</a></div>
+      </div>    </div>
+  </div>
+</section><section id="contact" class="contact">
+  <div class="container">
+    <h2 class="section-title">Get in Touch</h2>
+    <p>Interested in working together? Reach out via any of the channels below.</p>
+    <div class="contact-links">
+      <a href="https://github.com/moshelandau" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section><footer style="text-align:center; padding:2rem 1rem; color:var(--color-muted); font-size:0.8rem; border-top:1px solid var(--color-border);">
+  <p>&copy; 2026 Moshe Landau. Generated from git history.</p>
+</footer></body>
+</html>
